@@ -44,7 +44,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         reqwest::header::USER_AGENT,
         reqwest::header::HeaderValue::from_static("rust-github-client"),
     );
-    let mut res = client.get(&url).headers(headers).send().expect("Failed to send request");
+    let res = client.get(&url).headers(headers).send().expect("Failed to send request");
 
     let mut repos = res.json::<Vec<Repo>>()?;
     for repo in &mut repos {

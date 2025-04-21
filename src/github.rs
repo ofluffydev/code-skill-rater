@@ -13,6 +13,9 @@ impl Repo {
     /// Get the name of the repository
     pub fn name(&self) -> &str {
         &self.name
+
+        // Here you'll get the readme from https://raw.githubusercontent.com/{username}/{repository}/refs/heads/master/README.md
+        // Make sure to handle the case where the readme is not available  (e.g., 404 error)
     }
 
     /// Get the README contents if available
