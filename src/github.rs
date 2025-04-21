@@ -24,7 +24,7 @@ impl GithubUser {
     /// Create a new GithubUser by fetching the repositories and their READMEs
     pub fn new(client: &Client, username: &str) -> Self {
         info!("Creating GithubUser for username: {}", username); // Logging added
-        let url = format!("https://api.github.com/users/{username}/repos?sort=pushed");
+        let url = format!("https://api.github.com/users/{username}/repos?sort=updated");
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert(
             reqwest::header::USER_AGENT,
@@ -54,8 +54,8 @@ impl GithubUser {
                     Ok(readme) => {
                         if readme.status().is_success() {
                             let mut readme_content = readme.text().expect("Failed to read README.md");
-                            if readme_content.len() > 200 {
-                                readme_content.truncate(200);
+                            if readme_content.len() > 500 {
+                                readme_content.truncate(500);
                                 readme_content.push_str("... Shortened for AI to read");
                             }
                             repo.readme = Some(readme_content);
@@ -71,8 +71,8 @@ impl GithubUser {
                             if let Ok(readme) = readme_res {
                                 if readme.status().is_success() {
                                     let mut readme_content = readme.text().expect("Failed to read README");
-                                    if readme_content.len() > 200 {
-                                        readme_content.truncate(200);
+                                    if readme_content.len() > 500 {
+                                        readme_content.truncate(500);
                                         readme_content.push_str("... Shortened for AI to read");
                                     }
                                     repo.readme = Some(readme_content);
