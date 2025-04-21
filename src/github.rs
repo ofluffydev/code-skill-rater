@@ -1,6 +1,9 @@
 use reqwest::blocking::Client;
+use serde::Deserialize;
 #[allow(dead_code)]
-#[derive(Debug)]
+
+
+#[derive(Debug, Deserialize)]
 pub struct Repo {
     name: String,
     readme: Option<String>,
